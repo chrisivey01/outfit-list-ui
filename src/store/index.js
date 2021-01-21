@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
-import outfitReducer from './outfitList'
-
-
+import outfitReducer from './reducers/outfits'
 
 export default combineReducers({
-    outfitReducer,
-
+    clothing: outfitReducer,
 })

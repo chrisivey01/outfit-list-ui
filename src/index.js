@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
-import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from "redux-thunk";
+import App from './App';
+import combineReducers from "./store/index";
+import logger from 'redux-logger'
+const middle = [thunk]
+const store = createStore(combineReducers, applyMiddleware(...middle));
 
-import combineReducers from "./store/reducers/index";
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const store = createStore(combineReducers, composeWithDevTools())
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+        <App />
   </Provider>,
   document.getElementById('root')
 );
-
