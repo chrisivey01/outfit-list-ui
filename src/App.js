@@ -16,6 +16,7 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import CardContent from "@material-ui/core/CardContent";
 import "@fontsource/roboto";
 import { getOutfitList, setOutfit, deleteOutfitFromList } from "./store/actions/outfits";
+import {closeOutfit, deleteOutfit} from "./apis/apis";
 
 const useStyles = makeStyles({
   container: {
@@ -51,7 +52,8 @@ const App = (props) => {
     dispatch(setOutfit(value));
   };
 
-  const deleteOutfit = (value) => {
+  const deleteOutfitHandler = async (value) => {
+    await deleteOutfit();
     dispatch(deleteOutfitFromList(value));
   };
 
@@ -62,10 +64,10 @@ const App = (props) => {
     }
   });
 
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", async (event) => {
     if (event.key === "Escape") {
       setShowHideToggler(false);
-      apis.closeOutfit();
+      await closeOutfit();
     }
   });
 
@@ -100,7 +102,7 @@ const App = (props) => {
                         primary={`Outfit ${i + 1}`}
                       />
                       <ListItemSecondaryAction>
-                        <IconButton onClick={() => deleteOutfit(value)} edge="end" aria-label="delete">
+                        <IconButton onClick={() => deleteOutfitHandler(value)} edge="end" aria-label="delete">
                           <DeleteOutlineIcon />
                         </IconButton>
                       </ListItemSecondaryAction>

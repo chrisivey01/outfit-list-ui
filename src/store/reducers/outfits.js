@@ -9,7 +9,7 @@ const outfitReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_OUTFIT_SUCCESS:
             return {
-                ...state, outfits: action.payload
+                ...state, outfits: state.outfits
             }
         case DELETE_OUTFIT_FROM_LIST:
             return {
